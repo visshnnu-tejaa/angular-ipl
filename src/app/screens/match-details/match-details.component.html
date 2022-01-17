@@ -1,0 +1,137 @@
+<app-loader [loading]="loading"></app-loader>
+
+<div class="container">
+  <h3 class="text-center-text-primary mt-5">{{ error }}</h3>
+  <div class="row mt-5">
+    <div class="col col-md-4">
+      <div class="card card-body">
+        <h5>
+          <strong>Place Details</strong>
+        </h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Team 1</th>
+              <td>{{ match.team1 }}</td>
+            </tr>
+            <tr>
+              <th>Team 2</th>
+              <td>{{ match.team2 }}</td>
+            </tr>
+            <tr>
+              <th>City</th>
+              <td>{{ match.city }}</td>
+            </tr>
+            <tr>
+              <th>Venue</th>
+              <td>{{ match.venue }}</td>
+            </tr>
+            <tr>
+              <th>Year</th>
+              <td>{{ match.season }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col col-md-4">
+      <div class="card card-body">
+        <h5>
+          <strong>Toss and Umpire Details</strong>
+        </h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Toss Winner</th>
+              <td>{{ match.toss_winner }}</td>
+            </tr>
+            <tr>
+              <th>Toss Decission</th>
+              <td>{{ match.toss_decision }}</td>
+            </tr>
+            <tr>
+              <th>Umpire 1</th>
+              <td>{{ match.umpire1 ? match.umpire1 : "--NA--" }}</td>
+            </tr>
+            <tr>
+              <th>Umpire 2</th>
+              <td>{{ match.umpire2 ? match.umpire2 : "--NA--" }}</td>
+            </tr>
+            <tr>
+              <th>Umpire 3</th>
+              <td>{{ match.umpire3 ? match.umpire3 : "--NA--" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col col-md-4">
+      <div class="card card-body">
+        <h5>
+          <strong>Match Details</strong>
+        </h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Winner / tie</th>
+              <td>{{ match.result }}</td>
+            </tr>
+            <tr>
+              <th>Winner Team</th>
+              <td>{{ match.winner }}</td>
+            </tr>
+            <tr>
+              <th>Won by Runs</th>
+              <td>{{ match.win_by_runs }}</td>
+            </tr>
+            <tr>
+              <th>Won by Wickets</th>
+              <td>{{ match.win_by_wickets }}</td>
+            </tr>
+            <tr>
+              <th>Man of the Match</th>
+              <td>{{ match.player_of_match }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="match.result !== 'tie'; then thenBlock; else elseBlock"></div>
+    <ng-template #thenBlock>
+      <div class="container mt-3">
+        <strong>{{ match.team1 }}</strong> vs
+        <strong>{{ match.team2 }}</strong> match is held in
+        <strong> {{ match.venue }}</strong> at
+        <strong>{{ match.city }}</strong> in
+        <strong> {{ match.season + "," }} </strong>
+        Where Toss was won by <strong>{{ match.toss_winner }}</strong> and
+        chooses
+        <strong>{{ match.toss_decision + "ing " }}</strong>
+        and <strong>{{ match.winner }}</strong> Won by
+        <strong>
+          {{
+            match.win_by_runs != 0
+              ? match.win_by_runs + " runs"
+              : match.win_by_wickets + " wickets, "
+          }}
+        </strong>
+        and <strong>{{ match.player_of_match }}</strong> was the Man of the
+        Match.
+      </div>
+    </ng-template>
+    <ng-template #elseBlock>
+      <div class="container mt-3">
+        <strong>{{ match.team1 }}</strong> vs
+        <strong>{{ match.team2 }}</strong> match is held in
+        <strong> {{ match.venue }}</strong> at
+        <strong>{{ match.city }}</strong> in
+        <strong> {{ match.season + ", " }} </strong>
+        Where Toss was won by <strong>{{ match.toss_winner }}</strong> and
+        chooses
+        <strong>{{ match.toss_decision + "ing " }}</strong>
+        and the match was <strong>{{ match.result }}</strong> and
+        <strong> {{ match.player_of_match }}</strong> was the Man of the Match.
+      </div>
+    </ng-template>
+  </div>
+</div>

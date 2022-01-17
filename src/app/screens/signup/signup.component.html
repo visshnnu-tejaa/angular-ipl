@@ -1,0 +1,141 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col col-md-6 col-sm-12 offset-md-3">
+      <div class="card card-body signup-card">
+        <div class="alert alert-danger" *ngIf="error">
+          {{ error }}
+        </div>
+        <h3>Sign Up</h3>
+        <form
+          [formGroup]="signUpForm"
+          novalidate
+          (ngSubmit)="signUpUser(signUpForm)"
+        >
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid':
+                  (form['email'].touched &&
+                    form['email'].errors &&
+                    form['email'].errors['required']) ||
+                  (form['email'].errors && form['email'].errors['email'])
+              }"
+            />
+            <div *ngIf="form['email'].touched && form['email'].invalid">
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['email'].untouched ||
+                    (form['email'].errors && !form['email'].errors['required'])
+                }"
+                class="text-danger"
+                >Email Required</small
+              >
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['email'].untouched ||
+                    (form['email'].errors && !form['email'].errors['email'])
+                }"
+                class="text-danger"
+                >Email should be Valid</small
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid':
+                  (form['password'].touched &&
+                    form['password'].errors &&
+                    form['password'].errors['required']) ||
+                  (form['password'].errors &&
+                    form['password'].errors['minlength']) ||
+                  (form['password'].errors &&
+                    form['password'].errors['maxlength'])
+              }"
+            />
+            <div *ngIf="form['password'].touched && form['password'].invalid">
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['password'].untouched ||
+                    (form['password'].errors &&
+                      !form['password'].errors['required'])
+                }"
+                class="text-danger"
+                >Password Required</small
+              >
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['password'].untouched ||
+                    (form['password'].errors &&
+                      !form['password'].errors['minlength'])
+                }"
+                class="text-danger"
+                >Password must be morethan 6 characters long</small
+              >
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['password'].untouched ||
+                    (form['password'].errors &&
+                      !form['password'].errors['maxlength'])
+                }"
+                class="text-danger"
+                >Password must me lessthan 10 characters</small
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              [ngClass]="{
+                'is-invalid':
+                  (form['confirmPassword'].touched &&
+                    form['confirmPassword'].errors &&
+                    form['confirmPassword'].errors['required']) ||
+                  signUpForm.errors
+              }"
+            />
+            <div *ngIf="form['confirmPassword'].touched && signUpForm.errors">
+              <small
+                [ngClass]="{
+                  'd-none':
+                    form['confirmPassword'].untouched &&
+                    signUpForm.errors &&
+                    !signUpForm.errors['mismatch']
+                }"
+                class="text-danger"
+                >Both passwords need to be match</small
+              >
+            </div>
+          </div>
+          <button
+            type="submit"
+            [disabled]="!signUpForm.valid"
+            class="btn btn-primary"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

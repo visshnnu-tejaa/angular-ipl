@@ -1,0 +1,18 @@
+.match-card:hover {
+  color: rgb(44, 44, 128);
+  font-weight: 500;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
+}
+.year {
+  clip-path: polygon(6% 0, 100% 0, 100% 100%, 0% 100%);
+  position: absolute;
+  background-color: crimson;
+  color: #fff;
+  font-weight: 500;
+  padding-left: 4px;
+  padding-right: 2px;
+  font-size: 0.8rem;
+  right: 0;
+}
